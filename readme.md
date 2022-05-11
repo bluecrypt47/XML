@@ -14,10 +14,11 @@ Mục lục:
 - Giả sử, tôi muốn kiểm tra số lượng hiện của 1 mặt hàng đang có trong kho của tôi. và kết quả ở hình dưới.
 ![Hình 1.](~/../img/1.png)
 
-- Giờ, tôi sẽ thử chèn thêm đoạn code sau `<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file://C:/Windows/System32/drivers/etc/hosts"> ]>` vào xml và giá trị `productId` tôi sẽ thay bằng `&xxe;` để hiện kết quả lên (hình dưới).
+- Tôi sẽ thử chèn thêm đoạn code sau `<!DOCTYPE test [ <!ENTITY xxe "hallo"> ]>` vào xml và giá trị `productId` tôi sẽ thay bằng `&xxe;` để hiện kết quả lên (hình dưới).
+![Hình 3.](~/../img/3.png)
+
+- Ở trên chỉ là 1 phép thử nhỏ. Tiếp theo, tôi sẽ chèn thêm đoạn code sau `<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>` thay `hallo` bằng `SYSTEM "file:///etc/passwd"` và mọi thứ giữ nguyên. Kết quả (hình dưới).
 ![Hình 2.](~/../img/2.png)
-
-
 
 
 
