@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<quantityCheck>
-<productId>
-1
-</productId>
-<quantity>
-63
-</quantity>
-</quantity>
+<classList>
+  <class>
+    <classId>1</classId>
+    <className>QWE</className>
+    <quantity>12</quantity>
+  </class>
+  <class>
+    <classId>2</classId>
+    <className>ASD</className>
+    <quantity>13</quantity>
+  </class>
+  <class>
+    <classId>3</classId>
+    <className>ZXC</className>
+    <quantity>14</quantity>
+  </class>
+  <class>
+    <classId>4</classId>
+    <className>asdasd</className>
+    <quantity>34</quantity>
+  </class>
+  <class>
+    <classId>5</classId>
+    <className>zse</className>
+    <quantity>15</quantity>
+  </class>
+  <class>
+    <classId>6</classId>
+    <className>qws</className>
+    <quantity>32</quantity>
+  </class>
+  <class>
+    <classId>7</classId>
+    <className>csa</className>
+    <quantity>2</quantity>
+  </class>
+</classList>

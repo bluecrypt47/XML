@@ -22,7 +22,7 @@
         table {
             width: 60%;
             border-collapse: collapse;
-            margin: 100px auto;
+            margin: auto auto;
         }
 
         th,
@@ -42,30 +42,32 @@
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     ?>
 
-    <?php
-    if (isset($_GET['productId'])) {
-        $id = $_GET['productId'];
-        $sql = "SELECT * FROM products WHERE idProduct = '$id'";
+    <!-- <?php
+            if (isset($_GET['productId'])) {
+                $id = $_GET['productId'];
+                $sql = "SELECT * FROM products WHERE idProduct = '$id'";
 
-        $result = mysqli_query($conn, $sql);
-        $productCheck = mysqli_fetch_assoc($result);
+                $result = mysqli_query($conn, $sql);
+                $productCheck = mysqli_fetch_assoc($result);
 
-        $doc = new DOMDocument('1.0', 'utf-8');
-        $doc->load('quantity.xml');
+                // Khởi tạo và load xml
+                $doc = new DOMDocument('1.0', 'utf-8');
+                $doc->load('quantity.xml');
 
-        $root = $doc->documentElement;
+                // lấy root node và lấy ra nội dung của của root element
+                $root = $doc->documentElement;
+                $content = $root->textContent;
 
-        $list = $root->getElementsByTagName("productId");
-        $flag = 0;
-        foreach ($list as $proId) {
-            if ($proId->nodeValue == $id) {
+                foreach ($root->getElementsByTagName('quantity') as $product) {
+                    if ($product->nodeType == XML_ELEMENT_NODE) {
+                        echo '<br>' . $product->nodeValue;
+                    }
+                }
             }
-        }
-    }
 
-    ?>
+            ?> -->
 
-    <table>
+    <!-- <table>
         <thead>
             <th>No.</th>
             <th>Product name</th>
@@ -77,7 +79,7 @@
             foreach ($products as $product) : ?>
                 <tr>
                     <td><?php echo $i++; ?></td>
-                    <td><img src="<?php echo $product['imageProduct']; ?>" width="100px"> | <?php echo $product['nameProduct']; ?></td>
+                    <td><img src="<?php echo $product['imageProduct']; ?>" width="100px" /> | <?php echo $product['nameProduct']; ?></td>
                     <td><?php echo $product['priceProduct'] . '/' . $product['unitProduct']; ?></td>
                     <td><a class="btn btn-primary" href="index.php?productId=<?php echo $product['idProduct'] ?>">Check</a></td>
                 </tr>
@@ -85,7 +87,35 @@
 
 
         </tbody>
-    </table>
+    </table> -->
+    <div style="margin-left: 400px;">
+        <form action="index.php" method="POST">
+            <label>Class ID</label><input type="text" name="classId" placeholder="1,2,3,..."><br>
+            <label>Class Name</label><input type="text" name="className" placeholder="Test"><br>
+            <label>Quantity</label><input type="text" name="quantity" placeholder="0"><br>
+            <input type="submit" name="submit">
+        </form>
+    </div>
+
+    <?php
+        echo "<table border='1' cellspacing='0' cellpadding='0'>";
+            echo "<tr align='center'>";
+                echo "<td>No.</td>";
+                echo "<td>Class Name</td>";
+                echo "<td>Quantity</td>";
+            echo "</tr>";
+
+            $xml = simplexml_load_file('quantity.xml') or die();
+            $i = 1;
+            foreach($xml->children() as $value){
+                echo "<tr>";
+                    echo "<td>".$i++."</td>";
+                    echo "<td>".$value->className."</td>";
+                    echo "<td>".$value->quantity."</td>";
+                echo "</tr>";
+            }
+        echo "</table>";
+    ?>
 </body>
 
 </html>
