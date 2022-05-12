@@ -35,4 +35,14 @@
     <className>csa</className>
     <quantity>2</quantity>
   </class>
+  <class>
+    <classId>8</classId>
+    <className>fgh</className>
+    <quantity>54</quantity>
+  </class>
+  <class>
+    <classId>9</classId>
+    <className>hdr</className>
+    <quantity>21</quantity>
+  </class>
 </classList>

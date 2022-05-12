@@ -7,7 +7,6 @@ header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect('localhost', 'root', '', 'shop') or die('Connection fail!');
 mysqli_set_charset($conn, "utf8");
 
-
 if (isset($_POST['submit'])) {
     $id = $_POST['classId'];
     $className = $_POST['className'];
